@@ -5,8 +5,13 @@
 ## Usage
 
 ```python
->>> from sdut_spider import Ehall
+>>> from sdut_spider import Ehall, Lib
 >>> ehall = Ehall()
 >>> ehall.login('username', 'password')
 True
+>>> lib = Lib(ehall)
+>>> lib.logined
+True
+>>> lib.get_borrow_info()
+[]
 ```
