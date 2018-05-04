@@ -14,6 +14,7 @@ class Lib(object):
             print("ehall 必须为已经登录的 Ehall 实例")
             return
         cookies = ehall.cookies
+        self.ehall = ehall
         self.session = session()
         self.session.cookies = cookiejar_from_dict(json.loads(cookies))
         self.login()

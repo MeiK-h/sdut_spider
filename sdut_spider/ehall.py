@@ -10,7 +10,8 @@ class Ehall(object):
     def __init__(self, cookies=None):
         self.session = session()
         if cookies:
-            self.cookies = cookiejar_from_dict(json.dumps(cookies))
+            self.session.cookies = cookiejar_from_dict(json.loads(cookies))
+        self._user_id = None
 
     def login(self, username, password):
         self.username = username
@@ -61,8 +62,10 @@ class Ehall(object):
     def logined(self):
         """ 检查登录状态 """
         login_html = self.session.get(
-            'http://authserver.sdut.edu.cn/authserver/login')
+            'http://authserver.sdut.edu.cn/authserver/login', allow_redirects=False)
         # 判断当前是否登录(自动跳转至首页)
+        if login_html.status_code == 302:
+            return True
         if login_html.url == 'http://authserver.sdut.edu.cn/authserver/index.do':
             return True
         return False
@@ -71,3 +74,13 @@ class Ehall(object):
     def cookies(self):
         """ 返回 cookies """
         return json.dumps(dict_from_cookiejar(self.session.cookies))
+
+    @property
+    def user_id(self):
+        """ 获取 user_id （学号） """
+        if self._user_id is None:
+            rst = self.session.get(
+                'http://ehall.sdut.edu.cn/xsfw/sys/swpubapp/userinfo/getConfigUserInfo.do')
+            data = json.loads(rst.text)
+            self._user_id = data['data'][0]
+        return str(self._user_id)

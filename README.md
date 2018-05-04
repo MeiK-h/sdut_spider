@@ -5,7 +5,7 @@
 ## Usage
 
 ```python
->>> from sdut_spider import Ehall, Lib
+>>> from sdut_spider import Ehall, Lib, Dormitory
 >>> ehall = Ehall()
 >>> ehall.login('username', 'password')
 True
@@ -14,4 +14,9 @@ True
 True
 >>> lib.get_borrow_info()
 []
+>>> dormitory = Dormitory(ehall)
+>>> dormitory.logined
+True
+>>> dormitory.get_dorm_health()
+[...]
 ```
