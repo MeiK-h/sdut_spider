@@ -12,6 +12,7 @@ class Ehall(object):
         if cookies:
             self.session.cookies = cookiejar_from_dict(json.loads(cookies))
         self._user_id = None
+        self._name = None
 
     def login(self, username, password):
         self.username = username
@@ -84,3 +85,13 @@ class Ehall(object):
             data = json.loads(rst.text)
             self._user_id = data['data'][0]
         return str(self._user_id)
+
+    @property
+    def name(self):
+        """ 获取姓名信息 """
+        if self._name is None:
+            rst = self.session.get(
+                'http://ehall.sdut.edu.cn/publicapp/sys/myyktzd/api/getOverviewInfo.do')
+            rjson = json.loads(rst.text)
+            self._name = rjson['datas']['NAME']
+        return str(self._name)
