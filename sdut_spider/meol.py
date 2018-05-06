@@ -49,12 +49,12 @@ class Meol(object):
         for li in lis[1:1+r1]:
             notice.append({
                 'url': 'http://211.64.28.63/meol/' + li.a.get('href'),
-                'title': li.a.string
+                'title': li.a.string.strip()
             })
         for li in lis[2+r1:]:
             work.append({
                 'url': 'http://211.64.28.63/meol/' + li.a.get('href'),
-                'title': li.a.string
+                'title': li.a.string.strip()
             })
         return {
             'notice': notice,
