@@ -23,7 +23,7 @@ class Ehall(object):
     def login_ehall(self):
         """ 通过 AuthServer 登录至 Ehall """
         rst = self.session.get(
-            'http://ehall.sdut.edu.cn/login?service=http://ehall.sdut.edu.cn/new/ehall.html')
+            'http://ehall.sdut.edu.cn/login?service=http://ehall.sdut.edu.cn/new/ehall.html', allow_redirects=False)
         if rst.url == 'http://ehall.sdut.edu.cn/new/ehall.html':
             return True
         return False
