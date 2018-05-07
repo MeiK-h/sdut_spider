@@ -7,12 +7,13 @@
 The data source of sdut_spider is from various websites within SDUT. If you want to use this project, you must indicate the source of the data in an obvious place.
 
 Data sources and corresponding websites:
-- dormitory: [网上服务大厅](http://ehall.sdut.edu.cn/new/ehall.html)
-- ecard:     [一卡通自助查询平台](http://211.64.27.136/SelfSearch/Default.aspx)
-- ehall:     [网上服务大厅](http://ehall.sdut.edu.cn/new/ehall.html)
-- lib:       [山东理工大学图书馆书目检索系统](http://222.206.65.12/reader/redr_info.php)
-- logistics: [后勤服务中心](http://hqfw.sdut.edu.cn)
-- meol:      [网络教学综合平台](http://211.64.28.63/meol/main.jsp)
+- dormitory:  [网上服务大厅](http://ehall.sdut.edu.cn/new/ehall.html)
+- ecard:      [一卡通自助查询平台](http://211.64.27.136/SelfSearch/Default.aspx)
+- edu_manage: [山东理工大学教学综合信息服务平台](http://210.44.191.125/jwglxt/xtgl/index_initMenu.html)
+- ehall:      [网上服务大厅](http://ehall.sdut.edu.cn/new/ehall.html)
+- lib:        [山东理工大学图书馆书目检索系统](http://222.206.65.12/reader/redr_info.php)
+- logistics:  [后勤服务中心](http://hqfw.sdut.edu.cn)
+- meol:       [网络教学综合平台](http://211.64.28.63/meol/main.jsp)
 
 
 ## Usage

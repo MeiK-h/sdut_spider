@@ -9,12 +9,14 @@ from sqlalchemy.orm import sessionmaker
 
 from .dormitory import Dormitory
 from .ecard import Ecard
+from .edu_manage import EduManage
 from .ehall import Ehall
 from .lib import Lib
 from .logistics import Logistics
 from .meol import Meol
 
-class_set = [Dormitory, Ecard, Ehall, Lib, Logistics, Meol]
+
+class_set = [Dormitory, Ecard, Ehall, Lib, Logistics, Meol, EduManage]
 Base = declarative_base()
 db_name = 'cookies_cache.db'
 
@@ -43,7 +45,6 @@ class SDUT(object):
         if not ehall:
             return None
         obj = clas(ehall)
-        obj.login()
         return obj if obj.logined else None
 
 
