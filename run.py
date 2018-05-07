@@ -46,5 +46,18 @@ def api():
     })
 
 
+@app.route('/<clas>/')
+def get_class_func(clas):
+    l = dir(class_dict[clas])
+    func = []
+    for i in l:
+        if i.startswith('get_'):
+            func.append(i)
+    return jsonify({
+        'state': 'success',
+        'data': func
+    })
+
+
 if __name__ == '__main__':
     app.run(debug=True)

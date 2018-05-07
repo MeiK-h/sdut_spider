@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <div id="content">
-    <form action="" method="post">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-2 col-xs-12 col-xs-offset-0">
                 <div class="panel panel-info">
@@ -19,19 +18,19 @@
                         <div class="form-group has-feedback col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">学号</div>
-                                <input type="text" name="user_id" required="" class="form-control">
+                                <input type="text" name="user_id" id="user_id" required="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group has-feedback col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">密码</div>
-                                <input type="password" name="password" required="" class="form-control">
+                                <input type="password" name="password" id="password" required="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group has-feedback col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">class</div>
-                                <select name="class" class="form-control">
+                                <select name="class" class="form-control" onchange="get_func()" id="class">
                                     <option value="Dormitory">Dormitory</option>
                                     <option value="Ecard">Ecard</option>
                                     <option value="EduManage">EduManage</option>
@@ -45,18 +44,100 @@
                         <div class="form-group has-feedback col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">func</div>
-                                <input type="text" name="func" required="" class="form-control">
+                                <select name="func" class="form-control" id="func">
+
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <button style="width: 100%;" type="submit" class="btn btn-info ">查询
+                                <button style="width: 100%;" onclick="get_data()" class="btn btn-info ">查询
                                 </button>
                             </div>
                         </div>
                     </div>
+                    <pre style="width:100%;" id="result"></pre>
                 </div>
             </div>
         </div>
-    </form>
 </div>
+<script>
+    function get_func() {
+        const clas = $("#class").val();
+        console.log('get ' + clas);
+        $.get('/' + clas + '/', function (rst, state) {
+            l = rst.data;
+            var str = '';
+            for (var i = 0; i < l.length; i++) {
+                console.log(l[i]);
+                str += '<option value="' + l[i] + '">' + l[i] + '</option>';
+            }
+            console.log('\n');
+            $("#func").html(str);
+        })
+    }
+    get_func();
+
+    function get_data() {
+        data = {
+            "user_id": $("#user_id").val(),
+            "password": $("#password").val(),
+            "class": $("#class").val(),
+            "func": $("#func").val()
+        }
+        $.post('/', data = data, function (rst, state) {
+            $('#result').html(syntaxHighlight(rst));
+        })
+    }
+
+    function syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+        return json.replace(
+            /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+            function (match) {
+                var cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+    }
+</script>
+<style>
+    pre {
+        outline: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .string {
+        color: green;
+    }
+
+    .number {
+        color: darkorange;
+    }
+
+    .boolean {
+        color: blue;
+    }
+
+    .null {
+        color: magenta;
+    }
+
+    .key {
+        color: red;
+    }
+</style>

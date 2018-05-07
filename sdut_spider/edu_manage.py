@@ -44,17 +44,13 @@ class EduManage(object):
             'queryModel.currentPage': '1',
             'time': '0',
         }
-        if year == -1:
-            return None
-        data['xnm'] = str(year)
-        if semester == -1:
-            return None
-        if semester == 1:
-            data['xqm'] = '3'
-        elif semester == 2:
-            data['xqm'] = '12'
-        else:
-            return None
+        if year != -1:
+            data['xnm'] = str(year)
+        if semester != -1:
+            if semester == 1:
+                data['xqm'] = '3'
+            elif semester == 2:
+                data['xqm'] = '12'
 
         rst = self.session.post(url, data=data)
         rjson = json.loads(rst.text)

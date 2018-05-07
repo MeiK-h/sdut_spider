@@ -63,8 +63,8 @@ class Dormitory(object):
         self.session.get(
             'http://ehall.sdut.edu.cn/appShow?appId=4606888687682093')
         data = {
-            'pageSize': 50,  # 只读取一页，50 条数据
-            'pageNumber': 1  # 我就不信，一个学期能有 50 个周不成？
+            'pageSize': 100,  # 只读取一页，50 条数据
+            'pageNumber': 1
         }
         rst = self.session.get(
             'http://ehall.sdut.edu.cn/xsfw/sys/sswsapp/modules/dorm_health_student/sswsxs_sswsxsbg.do', data=data)
