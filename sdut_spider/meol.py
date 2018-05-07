@@ -42,7 +42,7 @@ class Meol(object):
         ul = soup.find(id='reminder')
         spans = ul.find_all('span')
         r1 = int(spans[0].string)
-        r2 = int(spans[1].string)
+        # r2 = int(spans[1].string)
         lis = ul.find_all('li')
         notice = []
         work = []
