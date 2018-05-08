@@ -1,10 +1,12 @@
 # coding=utf-8
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 
 from sdut_spider import (SDUT, Dormitory, Ecard, EduManage, Ehall, Lib,
                          Logistics, Meol)
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/', methods=['GET'])
