@@ -1,0 +1,112 @@
+{% extends 'headers.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+<div class="page-header col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" style="margin-top: 5px;">
+    <h1>绑定信息
+        <small>
+            <a id="get-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+                <span style="top: 3px;" class="glyphicon glyphicon-info-sign"></span>
+            </a>
+        </small>
+    </h1>
+</div>
+<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>
+                <span class="glyphicon glyphicon-pencil"></span>&nbsp;请输入信息&nbsp;
+                <small>Info</small>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div id="alert-area">
+            </div>
+            <form class="form" role="form">
+                <div class="form-group has-feedback col-sm-12">
+                    <div class="input-group">
+                        <div class="input-group-addon">学号</div>
+                        <input id="ipt-id" type="text" class="form-control" placeholder="学号，限在校学生" required>
+                    </div>
+                </div>
+                <div class="form-group has-feedback col-sm-12">
+                    <div class="input-group">
+                        <div class="input-group-addon">密码</div>
+                        <input id="ipt-pass" type="password" class="form-control" placeholder="通常为身份证后六位" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <button style="width: 100%;" type="button" class="btn btn-info " id="btn-bind">绑定</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="bind-area" style="display: none">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <span class="glyphicon glyphicon-apple"></span>
+            绑定成功
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    $(document).ready(function () {
+        $("#ipt-id").val($.cookie('user_id'));
+        $("#ipt-pass").val($.cookie('password'));
+
+        $('#get-info').tooltip({
+            trigger: "click hover focus",
+            title: "绑定的信息不会以任何形式被保存，仅会以 cookie 的形式在您的电脑或手机上维持。本项目完全开源，您可以自行审查代码以确保安全。"
+        });
+        $("#ipt-id, #ipt-pass").change(function () {
+            if (!(($("#ipt-pass").val() == null || $("#ipt-pass").val() == "") &&
+                    ($("#ipt-id").val() == null || $("#ipt-id").val() == ""))) {
+                $("#ipt-pass").parent().removeClass("has-error").find(
+                        "span.form-control-feedback")
+                    .remove();
+                $("#ipt-id").parent().removeClass("has-error").find(
+                    "span.form-control-feedback").remove();
+            }
+        });
+        $("#ipt-id").keypress(function () {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                $("#ipt-pass").focus();
+            }
+        });
+        $("#ipt-pass").keypress(function () {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                $("#btn-bind").click();
+            }
+        });
+
+        $("#btn-bind").click(function () {
+            if ($(this).hasClass("disabled")) {
+                return;
+            }
+            if ($("#ipt-id").val() == null || $("#ipt-id").val() == "") {
+
+                $("#ipt-id").after(
+                    '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'
+                );
+                $("#ipt-id").parent().addClass("has-error");
+                $("ipt-id").focus();
+                return false;
+            }
+            if ($("#ipt-pass").val() == null || $("#ipt-pass").val() == "") {
+                $("#ipt-pass").after(
+                    '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'
+                );
+                $("#ipt-pass").parent().addClass("has-error");
+                return false;
+            }
+
+            $.cookie('user_id', $("#ipt-id").val(), 2147483647);
+            $.cookie('password', $("#ipt-pass").val(), 2147483647);
+            $("#bind-area").css('display', 'block');
+        });
+    });
+</script>
+{% endblock %}

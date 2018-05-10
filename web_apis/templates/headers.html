@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link rel="stylesheet" href="/static/css/sdut_query.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/jquery-confirm.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/semantic.min.js"></script>
+    <script src="/static/js/jquery-confirm.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <meta charset="utf-8">
+    <title>{% block title %}SDUT Spider{% endblock %} - by MeiK</title>
+</head>
+
+<body>
+    <div class="container" style="width: 100%;">
+        <div class="row-fluid">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#yp-navbar-collapse">
+                            <span class="sr-only">Navbar</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            <span class="icon iconfont">SDUT</span>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="yp-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    宿舍服务
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">宿舍卫生查询</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">宿舍信息查询</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    校园卡服务
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">余额查询</a>
+                                        <a href="#">消费详单</a>
+                                        <a href="#">消费汇总</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    教务管理
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">课程表查询</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    图书馆
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">当前借阅</a>
+                                        <a href="#">历史借阅</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    后勤服务
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">宿舍电量查询</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    教学平台
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">作业通知</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    网上服务大厅
+                                    <b class="caret" style="margin-left: 4px;"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">个人信息</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div style="height: 50px;"></div>
+            <div class="mix">
+
+                <div id="content">
+                    <div style="height: 20px;"></div>
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui center aligned copyright container">
+        <p>
+            Copyright © 2018&nbsp;
+            <a href="http://www.sdut.edu.cn/" target="_blank">SDUT</a>&nbsp; All Rights Reserved.
+        </p>
+        <p>Developed by
+            <a href="https://github.com/MeiK-h" target="_blank">MeiK</a>
+        </p>
+        <p>Front-end style designed by
+            <a href="https://dreamer.blue" target="_blank">bLue</a> &amp;
+            <a href="http://sdut.dogest.cn/" target="_blank">Shannon</a>
+        </p>
+    </div>
+    {% block script %}
+    {% endblock %}
+</body>
+
+</html>
