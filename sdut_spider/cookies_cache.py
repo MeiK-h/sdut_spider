@@ -44,6 +44,8 @@ class SDUT(object):
         ehall = self.get_ehall(user_id, password)
         if not ehall:
             return None
+        if clas.__name__ == 'Ehall':
+            return ehall
         obj = clas(ehall)
         return obj if obj.logined else None
 

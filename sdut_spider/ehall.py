@@ -95,3 +95,21 @@ class Ehall(object):
             rjson = json.loads(rst.text)
             self._name = rjson['datas']['NAME']
         return str(self._name)
+
+    def get_base_info(self):
+        """ 获取学生基本信息 """
+        rst = self.session.get(
+            'http://ehall.sdut.edu.cn/appShow?appId=4585275700341858')
+        rst = self.session.get(
+            'http://ehall.sdut.edu.cn/xsfw/sys/jbxxapp/modules/infoStudent/getStuBaseInfo.do?requestParamStr={}')
+        rjson = json.loads(rst.text)
+        return rjson
+
+    def get_family_info(self):
+        """ 家庭信息 """
+        rst = self.session.get(
+            'http://ehall.sdut.edu.cn/appShow?appId=4585275700341858')
+        rst = self.session.get(
+            'http://ehall.sdut.edu.cn/xsfw/sys/jbxxapp/modules/infoStudent/getStuFamilyInfo.do?requestParamStr={}')
+        rjson = json.loads(rst.text)
+        return rjson

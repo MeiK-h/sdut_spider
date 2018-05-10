@@ -45,6 +45,8 @@ class EduManage(object):
             'time': '0',
         }
         if year != -1:
+            if isinstance(year, str):
+                year = year[:4]
             data['xnm'] = str(year)
         if semester != -1:
             if semester == 1:
@@ -103,7 +105,7 @@ class EduManage(object):
                 'data': rdata_list,
                 'name': rjson['items'][0].get('xm'),
                 'sex': rjson['items'][0].get('xbmc'),
-                'stuid': rjson['items'][0].get('xh_id'),
+                'user_id': rjson['items'][0].get('xh_id'),
                 'grade': rjson['items'][0].get('njdm_id'),
                 'major': rjson['items'][0].get('zymc'),
                 'class': rjson['items'][0].get('bjmc')
@@ -111,3 +113,82 @@ class EduManage(object):
             return rdata
         else:  # 否则以原始形式返回
             return rjson
+
+    def get_cur_week(self):
+        """ 获取当前周 """
+        self.ehall.session.get(
+            'http://ehall.sdut.edu.cn/appShow?appId=4787703225473911')
+        rst = self.ehall.session.get(
+            'http://ehall.sdut.edu.cn/publicapp/sys/mykbxt/myTimeTable/queryThisWeekCourses.do')
+        rst = json.loads(rst.text)
+        return {
+            'cur_week': rst['weekOfTerm'],
+            'year': rst['schoolYearTerm'][:-2],
+            'semester': rst['schoolYearTerm'][-1:]
+        }
+
+    def get_cur_schedule(self, cur=None):
+        """ 获取当前周的课表 """
+        if cur is None:
+            data = self.get_cur_week()
+            cur = data['cur_week']
+        year = data['year']
+        semester = data['semester']
+        # 获取当前学期的全部课表
+        all_schedule = self.get_schedule(year=year, semester=semester)
+        all_schedule['data'] = week_filter_schedule(all_schedule['data'], cur)
+        return {
+            'year': year,
+            'semester': semester,
+            'cur': cur,
+            'schedule': all_schedule
+        }
+
+
+def week_filter_schedule(schedule, week):
+    """ 查找出所有对应周的课 """
+    r_schedule = []
+    for c in schedule:
+        time_location = c.get('time_location')
+        if not time_location:
+            continue
+
+        c['time_location'] = []
+        for tl in time_location:
+            if in_week(tl['week'], week):
+                c['time_location'].append(tl)
+                continue
+        if c['time_location']:
+            r_schedule.append(c)
+    return r_schedule
+
+
+def in_week(t, week):
+    """ 检查某节课的时间是否在指定周内 """
+    t = t.split(',')
+    for i in t:
+        if i.endswith('(双)'):
+            if '-' in i:
+                s, e = i[:-4].split('-')
+                if week >= int(s) and week <= int(e) and week % 2 == 0:
+                    return True
+            else:
+                if week == int(i[:-4]):
+                    return True
+        elif i.endswith('(单)'):
+            if '-' in i:
+                s, e = i[:-4].split('-')
+                if week >= int(s) and week <= int(e) and week % 2 == 1:
+                    return True
+            else:
+                if week == int(i[:-4]):
+                    return True
+        else:
+            if '-' in i:
+                s, e = i[:-1].split('-')
+                if week >= int(s) and week <= int(e):
+                    return True
+            else:
+                if week == int(i[:-1]):
+                    return True
+    return False
