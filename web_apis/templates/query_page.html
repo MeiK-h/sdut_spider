@@ -1,0 +1,20 @@
+{% extends 'headers.html' %} {% block content %}
+<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-2 col-xs-12 col-xs-offset-0" id="loading-area">
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <span class="glyphicon glyphicon-apple"></span>
+        &nbsp;加载中
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    $(document).ready(function () {
+        let data = {
+            'user_id': $.cookie('user_id'),
+            'password': $.cookie('password')
+        }
+        $.post('', data, function (rst) {
+            $("#loading-area").html(rst);
+        })
+    });
+</script>
+{% endblock %}

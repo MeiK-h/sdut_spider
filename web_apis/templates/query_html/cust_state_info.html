@@ -1,0 +1,47 @@
+<div id="data-area" style="margin-bottom: 50px;">
+    <nav aria-label="Page navigation" class="nav-log-pager" data-size="20" data-page="1" data-id="151105720" data-name="">
+        <ul class="pagination">
+            <li class="{% if delta == 7 %}active{% endif %}">
+                <a href="/ecard/cust_state_info/7/">最近一周</a>
+            </li>
+            <li class="{% if delta == 30 %}active{% endif %}">
+                <a href="/ecard/cust_state_info/30/">最近一个月</a>
+            </li>
+            <li class="{% if delta == 365 %}active{% endif %}">
+                <a href="/ecard/cust_state_info/365/">最近一年</a>
+            </li>
+            <li class="{% if delta == 1461 %}active{% endif %}">
+                <a href="/ecard/cust_state_info/1461/">全部</a>
+            </li>
+        </ul>
+    </nav>
+    <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+        <thead>
+            <tr>
+                <th>交易编号</th>
+                <th>原因</th>
+                <th>金额</th>
+                <!-- <th>大钱包管理费总额</th>
+                <th>补助钱包交易总额</th>
+                <th>补助钱包管理费总额</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.reason }}</td>
+                <td>{{ i.amount }}</td>
+                <!-- <td>{{ i.ext_1 }}</td>
+                <td>{{ i.ext_2 }}</td>
+                <td>{{ i.ext_3 }}</td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="data-area" style="margin-bottom: 50px;">
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <span class="glyphicon glyphicon-apple"></span>&nbsp; 因校园卡中心限制，数据可能不全，但已有数据是准确的。
+    </div>
+</div>

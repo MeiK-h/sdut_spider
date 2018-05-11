@@ -1,0 +1,44 @@
+<div id="data-area" style="margin-bottom: 50px;">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+                <tbody>
+                    <tr class="active">
+                        <td colspan="2">
+                            <strong>未读课程通知</strong>
+                        </td>
+                    </tr>
+                    {% for i in data.notice %}
+                    <tr>
+                        <td>
+                            <a href="{{ i.url }}" target="_blank">{{ i.title }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="data-area" style="margin-bottom: 50px;">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+                <tbody>
+                    <tr class="active">
+                        <td colspan="2">
+                            <strong>未提交作业</strong>
+                        </td>
+                    </tr>
+                    {% for i in data.work %}
+                    <tr>
+                        <td>
+                            <a href="{{ i.url }}" target="_blank">{{ i.title }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

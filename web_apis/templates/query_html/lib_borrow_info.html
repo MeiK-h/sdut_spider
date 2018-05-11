@@ -1,0 +1,38 @@
+<div id="data-area" style="margin-bottom: 50px;">
+    <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+        <thead>
+            <tr>
+                <th>图书名</th>
+                <th>作者</th>
+                <th>借书日期</th>
+                <th>应还日期</th>
+                <th>续借次数</th>
+                <th>借书地点</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                {% if i.bookUrl %}
+                <td>
+                    <a href="{{ i.bookUrl }}">{{ i.title }}</a>
+                </td>
+                {% else %}
+                <td>{{ i.title }}</td>
+                {% endif %}
+                <td>{{ i.author }}</td>
+                <td>{{ i.borrowDate }}</td>
+                <td>{{ i.backDate }}</td>
+                <td>{{ i.borrowCnt }}</td>
+                <td>{{ i.site }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    $("#loading-area").removeClass('col-lg-4');
+    $("#loading-area").removeClass('col-lg-offset-4');
+    $("#loading-area").addClass('col-lg-8');
+    $("#loading-area").addClass('col-lg-offset-2');
+</script>

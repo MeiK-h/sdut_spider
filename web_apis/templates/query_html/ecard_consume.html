@@ -1,0 +1,31 @@
+<div id="data-area" style="margin-bottom: 50px;">
+    <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+        <thead>
+            <tr>
+                <th>时间</th>
+                <th>金额</th>
+                <th>描述</th>
+                <th>工作站</th>
+                <th>余额</th>
+                <th>终端</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.time }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.reason }}</td>
+                <td>{{ i.position }}</td>
+                <td>{{ i.balance }}</td>
+                <td>{{ i.termName }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="data-area" style="margin-bottom: 50px;">
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <span class="glyphicon glyphicon-apple"></span>&nbsp; 因校园卡中心限制，最多仅能获得最近的八条消费记录。
+    </div>
+</div>
