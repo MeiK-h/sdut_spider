@@ -101,8 +101,12 @@
                 return false;
             }
 
-            $.cookie('user_id', $("#ipt-id").val(), 2147483647);
-            $.cookie('password', $("#ipt-pass").val(), 2147483647);
+            $.cookie('user_id', $("#ipt-id").val(), {
+                expires: 366 * 4
+            });
+            $.cookie('password', $("#ipt-pass").val(), {
+                expires: 366 * 4
+            });
             $("#bind-area").css('display', 'block');
         });
     });
