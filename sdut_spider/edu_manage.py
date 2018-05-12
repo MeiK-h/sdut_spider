@@ -129,8 +129,8 @@ class EduManage(object):
 
     def get_cur_schedule(self, cur=None):
         """ 获取当前周的课表 """
+        data = self.get_cur_week()
         if cur is None:
-            data = self.get_cur_week()
             cur = data['cur_week']
         year = data['year']
         semester = data['semester']

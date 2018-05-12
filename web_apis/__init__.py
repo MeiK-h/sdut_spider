@@ -20,4 +20,7 @@ def create_app():
     from web_apis.apps import meol_app
     app.register_blueprint(meol_app, url_prefix='/meol')
 
+    from web_apis.apps import edu_manage_app
+    app.register_blueprint(edu_manage_app, url_prefix='/edu_manage')
+
     return app

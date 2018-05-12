@@ -1,0 +1,61 @@
+<div id="data-area" style="margin-bottom: 50px;">
+    <nav aria-label="Page navigation" class="nav-log-pager" data-size="20" data-page="1" data-id="151105720" data-name="">
+        <ul class="pagination">
+            {% for i in range(cur - 3, cur + 4) %} {% if i > 0 %}
+            <li class="{% if i == cur %}active{% endif %}">
+                <a href="/edu_manage/schedule/{{ i }}/">{{ i }}</a>
+            </li>
+            {% endif %} {% endfor %}
+        </ul>
+    </nav>
+    <div class="panel-body">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>
+                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;{{ data.schedule.user_id }} - {{ data.schedule.name }}&nbsp;
+                    <small>{{ data.year }} 学年&nbsp; / &nbsp;第 {{ data.semester }} 学期&nbsp; / &nbsp;第 {{ cur }} 周</small>
+                </h4>
+            </div>
+            <table class="table table-hover table-bordered" style="margin-bottom: 0px;">
+                <thead>
+                    <tr>
+                        <th>星期</th>
+                        <th>节次</th>
+                        <th>课表信息</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data.schedule.data %}
+                    <tr>
+                        <td rowspan="5">{{ i.time_location.time[:3] }}</td>
+                        <td rowspan="5">{{ i.time_location.time[4:-1] }}</td>
+                        <td>{{ i.course_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-home"></span>&nbsp; {{ i.time_location.location }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-time"></span>&nbsp; {{ i.time_location.week }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-user"></span>&nbsp; {{ i.teacher.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-flag"></span>&nbsp; {{ i.course_nature }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="data-area" style="margin-bottom: 50px;">
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <span class="glyphicon glyphicon-apple"></span>&nbsp; 课程表综合了教务系统和教学平台的数据，统计了选修课与调课换课等情况。如果您发现课程表出现了问题，请联系我 <a href="mailto:meik2333@gmail.com?subject=【狗子查询系统】问题反馈">meik2333@gmail.com</a> 。
+<br/>另： 如果有大佬愿意提供好看适用的 UI 的话，也可以联系我替换网站 UI 。
+    </div>
+</div>
