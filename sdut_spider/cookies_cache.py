@@ -99,6 +99,18 @@ def get_user(user_id, password):
     return None
 
 
+def get_user_list():
+    """ 从数据库查询所有用户的信息 """
+    engine = create_engine('sqlite:///{db_name}'.format(db_name=db_name))
+
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    user = session.query(User).all()
+    session.close()
+
+    return user
+
+
 def create_db():
     """ 创建数据库文件 """
     engine = create_engine('sqlite:///{db_name}'.format(db_name=db_name))
